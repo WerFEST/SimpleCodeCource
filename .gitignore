@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+/.vs
+/Debug
+/SimpleCodeCource.vcxproj.user
+/SimpleCodeCource.vcxproj.filters
+/SimpleCodeCource.vcxproj
+/SimpleCodeCource.sln
