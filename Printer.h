@@ -3,6 +3,7 @@
 #ifndef _PRINTER_H_
 #define _PRINTER_H_
 
+#include <string>
 
 template<typename T>
 class Printer
@@ -16,10 +17,10 @@ public:
 
 
 template<>
-class Printer<string>
+class Printer<std::string>
 {
 public:
-	void Print(string value)
+	void Print(std::string value)
 	{
 		std::cout << ":" << value << ":" << std::endl;
 	}

@@ -1,23 +1,114 @@
 ﻿#include "Header.h"
 
-#include "FirstNamespace.h"
-#include "Fact.h"
-#include "myStrlen.h"
-#include "myString.h"
-#include "Printer.h"
-
 using namespace FirstNamespace;
+
+void multiplyInt(int a)
+{
+	a *= 2;
+	cout << "multiplyInt \t" << a << endl;
+}
+
+void decideInt(int a)
+{
+	a /= 2;
+	cout << "decideInt \t" << a << endl;
+}
+
+void DoWork(vector<int>& vc, vector<function<void(int)>> funcVect)
+{
+	for (auto e1 : vc)
+	{
+		for (auto &fel : funcVect)
+		{
+			fel(e1);
+		}
+	}
+}
+
+void DoWork2(vector<int>& vc, function<void(int)> funcVect)
+{
+	for (auto e1 : vc)
+	{
+		funcVect(e1);
+	}
+}
+
 
 int main()
 {
-	//Namespaces
+	// Namespaces
 	/*
 	FirstNamespace::Foo();
 	FirstNamespace::test t;
 	t.Foo();
 	*/
 
-	
+
+
+
+
+	// Return Thread value with Lambda
+	/*
+	int result;
+	thread th([&result]() {
+		result = ThreadWorkParam(5, 10);
+		});
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << "Main Thread" << endl;
+		this_thread::sleep_for(std::chrono::milliseconds(1000));
+	}
+
+	th.join();
+	cout << "Result: " << result << endl;
+	*/
+
+	// Lambda-Function
+	/*
+	vector<int> vcc = { 1,2,3,4,56,19,100 };
+	function<void(int)> fVec;
+
+	auto afVec = [](int a) {
+		cout << "Lambda: \t" << a << endl;
+	};
+	DoWork2(vcc, afVec);
+
+	int p = 0;
+	DoWork2(vcc, [&p](int a)
+		{
+			cout << "Lambda: \t" << a << "\t p: \t" << p << endl;
+		});
+	*/
+
+	// std::function
+	/*
+	function<void()> f;
+	f = FirstNamespace::Foo;
+	f();
+
+	vector<int> vcc = { 1,2,3,4,56,19,100 };
+	vector<function<void(int)>> fVector;
+	fVector.emplace_back(multiplyInt);
+	fVector.emplace_back(decideInt);
+	DoWork(vcc, fVector);
+	*/
+
+	// Thread with return
+	/*
+	int q = 10;
+	int d = 5;
+	thread th(ThreadWorkParam, q, d);
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << "Main Thread" << endl;
+		this_thread::sleep_for(std::chrono::milliseconds(1000));
+	}
+
+	th.join();
+	cout << q << endl;
+	*/
 
 	// queue, priority_queue
 	/*
@@ -56,7 +147,8 @@ int main()
 
 	// Threads with params
 	/*
-	thread th(ThreadWorkParam, 1, 2);									//Указывается название функции для передачи в поток и через , указываются параметры
+	int a = 1, b = 2;
+	thread th(ThreadWorkParam, a, b);									//Указывается название функции для передачи в поток и через , указываются параметры
 
 	for (size_t i = 0; i < 10; i++)
 	{
